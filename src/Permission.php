@@ -19,6 +19,12 @@ class Permission extends Model
     ];
 
     /**
+     * Default number of items per page.
+     * @var int
+     */
+    protected $perPage = 10;
+
+    /**
      * Get the roles record associated with the permission.
      * @return Illuminate\Database\Eloquent\Collection
      */
