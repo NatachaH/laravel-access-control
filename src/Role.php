@@ -57,7 +57,7 @@ class Role extends Model
         if($strict) return $this->checkPermissionsModel($model,$actions);
 
         // If no action check if there is any model permission
-        if(is_null($actions)) return $this->permissions()->where('model', $model);
+        if(is_null($actions)) return $this->permissions()->where('model', $model)->exists();
 
         // Check if there is any model/action permission
         return $this->permissions()->where('model', $model)->whereIn('action', (array)$actions)->exists();
