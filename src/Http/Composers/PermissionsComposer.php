@@ -20,7 +20,7 @@ class PermissionsComposer
      */
     public function __construct()
     {
-        $this->$permissions = Permission::orderBy('model')->get();
+        $this->permissions = Permission::orderBy('model')->get();
     }
 
     /**
@@ -31,6 +31,6 @@ class PermissionsComposer
      */
     public function compose(View $view)
     {
-        $view->with(['permissions' => $this->$permissions]);
+        $view->with(['permissions' => $this->permissions]);
     }
 }
