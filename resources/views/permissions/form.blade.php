@@ -14,7 +14,7 @@
       @foreach ($permissions->whereNull('model') as $permission)
         <tr>
           <td><b>{{ $permission->name }}</b></td>
-          <td colspan="5">@include('ac::permissions.includes.checkbox', ['permission' => $permission->firstWhere('action','view')])</td>
+          <td colspan="5">@include('ac::permissions.includes.checkbox', ['permission' => $permission])</td>
         </tr>
       @endforeach
 
