@@ -2,6 +2,7 @@
 namespace Nh\AccessControl;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AccessControlServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,20 @@ class AccessControlServiceProvider extends ServiceProvider
                 \Nh\AccessControl\Commands\AddRoleableCommand::class,
             ]);
         }
+
+        // VIEWS
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ac');
+
+        // TRANSLATIONS
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ac');
+
+        // BLADES
+        Blade::component('ac-permission-checkbox', \Nh\AccessControl\View\Components\PermissionCheckbox::class);
+
+        // COMPOSERS
+        View::composer(
+          ['ac::permissions.form'], 'Nh\AccessControl\Composers\PermissionsComposer'
+        );
 
         // VENDORS
         $this->publishes([
