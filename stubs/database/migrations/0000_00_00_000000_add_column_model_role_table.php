@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumn{{ UCNAME }}RoleTable extends Migration
+class AddColumn{{ UCPNAME }}RoleTable extends Migration
 {
     public function up()
     {
