@@ -1,13 +1,13 @@
 <table class="table">
 
     <thead>
-        <th>@lang('ac::all')</th>
-        <th>@lang('ac::view')</th>
-        <th>@lang('ac::create')</th>
-        <th>@lang('ac::update')</th>
-        <th>@lang('ac::delete')</th>
-        <th>@lang('ac::restore')</th>
-        <th>@lang('ac::force-delete')</th>
+        <th>@lang('ac::action.all')</th>
+        <th>@lang('ac::action.view')</th>
+        <th>@lang('ac::action.create')</th>
+        <th>@lang('ac::action.update')</th>
+        <th>@lang('ac::action.delete')</th>
+        <th>@lang('ac::action.restore')</th>
+        <th>@lang('ac::action.force-delete')</th>
     </thead>
 
     <tbody>
