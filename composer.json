@@ -1,0 +1,24 @@
+{
+    "name": "nh/access-control",
+    "description": "Access controle via roles and permissions",
+    "license": "MIT",
+    "type": "library",
+    "require": {},
+    "author": {
+        "name": "Natacha Herth",
+        "email": "info@natachaherth.ch"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nh\\AccessControl\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nh\\AccessControl\\AccessControlServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
