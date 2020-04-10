@@ -15,13 +15,21 @@ class PermissionCheckbox extends Component
     public $values;
 
     /**
+     * The name of the translation file for models
+     *
+     * @var array
+     */
+    public $translation;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($values = [])
+    public function __construct($values = [], $translation = '')
     {
         $this->values = $values;
+        $this->translation = $translation;
     }
 
     /**
