@@ -66,7 +66,7 @@ class AddPermissionCommand extends Command
         }
 
         // Define the actions
-        $actions = ['view','create','edit','delete'];
+        $actions = ['view','create','update','delete'];
         if($softDeletes) {
           $actions[] = 'restore';
           $actions[] = 'force-delete';
