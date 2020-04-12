@@ -10,6 +10,23 @@ trait HasAccess
 {
 
     /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    protected static function bootHasAccess()
+    {
+        // Attache a role to the model
+        static::saving(function ($model)
+        {
+            if(request()->has('role'))
+            {
+                $model->role()->associate(request()->role);
+            }
+        });
+    }
+
+    /**
      * Get the model record associated with the role.
      * @return Illuminate\Database\Eloquent\Collection
      */
