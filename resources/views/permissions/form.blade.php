@@ -2,19 +2,33 @@
 
     <thead>
         <th>@lang('ac::action.all')</th>
-        <th>@lang('ac::action.view')</th>
-        <th>@lang('ac::action.create')</th>
-        <th>@lang('ac::action.update')</th>
-        <th>@lang('ac::action.delete')</th>
-        <th>@lang('ac::action.restore')</th>
-        <th>@lang('ac::action.force-delete')</th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.view')" name="permissionCheckboxAll[]" value="view"/>
+        </th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.create')" name="permissionCheckboxAll[]" value="create"/>
+        </th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.update')" name="permissionCheckboxAll[]" value="update"/>
+        </th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.delete')" name="permissionCheckboxAll[]" value="delete"/>
+        </th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.restore')" name="permissionCheckboxAll[]" value="restore"/>
+        </th>
+        <th>
+          <x-bs-check class="permission-checkbox-all" :label="__('ac::action.force-delete')" name="permissionCheckboxAll[]" value="force-delete"/>
+        </th>
     </thead>
 
     <tbody>
       @foreach ($permissions->whereNull('model') as $permission)
         <tr>
           <td><b>{{ $permission->name }}</b></td>
-          <td colspan="5">@include('ac::permissions.includes.checkbox', ['permission' => $permission])</td>
+          <td colspan="5">
+            <x-bs-check class="permission-checkbox-view" :label="__('ac::action.view')" name="permissions[]" :value="$permission->id"/>
+          </td>
         </tr>
       @endforeach
 
