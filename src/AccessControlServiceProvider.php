@@ -4,7 +4,7 @@ namespace Nh\AccessControl;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Gate;
+
 
 class AccessControlServiceProvider extends ServiceProvider
 {
@@ -64,9 +64,6 @@ class AccessControlServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php')
         ], 'access-control');
 
-        // POLICIES
-        Gate::policy('\Nh\AccessControl\Permission', \Nh\AccessControl\Policies\PermissionPolicy::class);
-        Gate::policy('\Nh\AccessControl\Role', \Nh\AccessControl\Policies\RolePolicy::class);
 
     }
 }
