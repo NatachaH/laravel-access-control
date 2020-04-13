@@ -14,22 +14,15 @@ class PermissionTable extends Component
      */
     public $values;
 
-    /**
-     * The name of the translation file for models
-     *
-     * @var array
-     */
-    public $translation;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($values = [], $translation = '')
+    public function __construct($values)
     {
         $this->values = $values;
-        $this->translation = $translation;
     }
 
     /**
