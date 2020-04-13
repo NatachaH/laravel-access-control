@@ -3,13 +3,13 @@ namespace Nh\AccessControl\Composers;
 
 use Illuminate\View\View;
 
-use Nh\AccessControl\Models\Role;
+use Nh\AccessControl\Role;
 
 class RolesComposer
 {
     /**
      * List of roles
-     * @var \Nh\AccessControl\Models\Role
+     * @var \Nh\AccessControl\Role
      */
     protected $roles;
 

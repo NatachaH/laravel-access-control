@@ -1,10 +1,10 @@
 <?php
 
-namespace Nh\AccessControl\Models;
+namespace Nh\AccessControl;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Nh\AccessControl\Models\Role;
+use Nh\AccessControl\Role;
 
 class Permission extends Model
 {

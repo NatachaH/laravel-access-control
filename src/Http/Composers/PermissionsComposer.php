@@ -3,13 +3,13 @@ namespace Nh\AccessControl\Composers;
 
 use Illuminate\View\View;
 
-use Nh\AccessControl\Models\Permission;
+use Nh\AccessControl\Permission;
 
 class PermissionsComposer
 {
     /**
      * List of permissions
-     * @var \Nh\AccessControl\Models\Permission
+     * @var \Nh\AccessControl\Permission
      */
     protected $permissions;
 
