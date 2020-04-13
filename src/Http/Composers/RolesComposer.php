@@ -20,7 +20,7 @@ class RolesComposer
      */
     public function __construct()
     {
-        $this->roles = Role::orderBy('name')->get();
+        $this->roles = Role::orderBy('name')->get()->pluck('name','id');
     }
 
     /**
