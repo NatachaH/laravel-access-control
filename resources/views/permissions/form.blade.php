@@ -26,9 +26,10 @@
       @foreach ($permissions->whereNull('model') as $permission)
         <tr>
           <td><b>{{ $permission->name }}</b></td>
-          <td colspan="5">
+          <td >
             @include('ac::permissions.includes.checkbox', ['permission' => $permission])
           </td>
+          <td colspan="4"></td>
         </tr>
       @endforeach
 
