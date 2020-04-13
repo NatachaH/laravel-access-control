@@ -1,4 +1,4 @@
-<table class="table">
+<table {{ $attributes->merge(['class' => 'table']) }}>
 
     <thead>
         <th>@lang('ac::action.all')</th>
@@ -27,7 +27,7 @@
         <tr>
           <td><b>{{ $permission->name }}</b></td>
           <td colspan="5">
-            <x-bs-check class="permission-checkbox-view" :label="__('ac::action.view')" name="permissions[]" :value="$permission->id"/>
+            @include('ac::permissions.includes.checkbox', ['permission' => $permission])
           </td>
         </tr>
       @endforeach

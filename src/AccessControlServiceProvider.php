@@ -4,6 +4,7 @@ namespace Nh\AccessControl;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Gate;
 
 class AccessControlServiceProvider extends ServiceProvider
 {

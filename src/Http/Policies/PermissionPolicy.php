@@ -43,7 +43,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission)
     {
-        return $user->hasAccess('permission','view');
+        return false;//$user->hasAccess('permission','view');
     }
 
     /**
