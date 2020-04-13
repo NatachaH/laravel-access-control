@@ -44,10 +44,12 @@ class AccessControlServiceProvider extends ServiceProvider
 
         // BLADES
         Blade::component('ac-permission-checkbox', \Nh\AccessControl\View\Components\PermissionCheckbox::class);
+        Blade::component('ac-permission-table', \Nh\AccessControl\View\Components\PermissionTable::class);
+
 
         // COMPOSERS
         View::composer(
-          ['ac::permissions.form'], 'Nh\AccessControl\Composers\PermissionsComposer'
+          ['ac::permissions.form','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer'
         );
 
         // VENDORS
