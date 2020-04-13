@@ -4,32 +4,30 @@ namespace Nh\AccessControl\View\Components;
 
 use Illuminate\View\Component;
 
-class PermissionCheckbox extends Component
+class PermissionFieldset extends Component
 {
 
     /**
-     * The array of the default values.
-     *
-     * @var array
+     * The legend of the fieldset
+     * @var string
      */
-    public $values;
+    public $legend;
 
     /**
-     * The name of the translation file for models
-     *
-     * @var array
+     * The default checkboxes that are checked
+     * @var string
      */
-    public $translation;
+    public $values;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($values = [], $translation = '')
+    public function __construct($legend, $values = [])
     {
+        $this->legend = $legend;
         $this->values = $values;
-        $this->translation = $translation;
     }
 
     /**
@@ -39,6 +37,6 @@ class PermissionCheckbox extends Component
      */
     public function render()
     {
-        return view('ac::permissions.form');
+        return view('ac::permissions.fieldset');
     }
 }

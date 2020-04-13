@@ -11,7 +11,6 @@ return [
     |
     */
 
-    'all'           => 'All permissions',
     'view'          => 'View',
     'create'        => 'Create',
     'update'        => 'Update',

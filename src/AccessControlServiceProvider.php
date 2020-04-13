@@ -43,14 +43,14 @@ class AccessControlServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ac');
 
         // BLADES
-        Blade::component('ac-permission-checkbox', \Nh\AccessControl\View\Components\PermissionCheckbox::class);
+        Blade::component('ac-permission-fieldset', \Nh\AccessControl\View\Components\PermissionFieldset::class);
         Blade::component('ac-permission-table', \Nh\AccessControl\View\Components\PermissionTable::class);
         Blade::component('ac-role-fieldset', \Nh\AccessControl\View\Components\RoleFieldset::class);
 
 
         // COMPOSERS
         View::composer(
-          ['ac::permissions.form','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer',
+          ['ac::permissions.fieldset','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer',
           ['ac::roles.fieldset'], 'Nh\AccessControl\Composers\RolesComposer'
         );
 

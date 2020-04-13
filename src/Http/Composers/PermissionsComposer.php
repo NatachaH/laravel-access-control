@@ -20,8 +20,21 @@ class PermissionsComposer
      */
     public function __construct()
     {
-        $this->permissions = Permission::orderBy('model')->get();
-    }
+        // Get permission with model
+        $permissions = Permission::whereNotNull('model')->select('id','model','action')->get()->groupBy('model');
+
+        // Get permission without model
+        $permissionWithoutModel = Permission::whereNull('model')->select('id','name','action')->get()->keyBy('name');
+
+        // Foreach permission without model, set default action as view and push in $permissions
+        foreach ($permissionWithoutModel as $key => $value) {
+          $value->action = 'view';
+          $permissions[$key] = collect()->push($value);
+        }
+
+        // Set the permissions
+        $this->permissions = $permissions;
+      }
 
     /**
      * Bind data to the view.
