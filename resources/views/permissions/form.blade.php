@@ -29,7 +29,7 @@
           <td >
             @include('ac::permissions.includes.checkbox', ['permission' => $permission])
           </td>
-          <td colspan="4"></td>
+          <td colspan="5"></td>
         </tr>
       @endforeach
 
