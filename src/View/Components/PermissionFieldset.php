@@ -20,14 +20,21 @@ class PermissionFieldset extends Component
     public $values;
 
     /**
+     * The path for the $key translation
+     * @var string
+     */
+    public $translation;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($legend, $values = [])
+    public function __construct($legend, $values = [], $translation = 'permission')
     {
         $this->legend = $legend;
         $this->values = $values;
+        $this->translation = $translation;
     }
 
     /**
