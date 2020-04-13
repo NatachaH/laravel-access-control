@@ -14,12 +14,12 @@
       @foreach ($permissions as $key => $permission)
         <tr>
           <td><b>{{ $key }}</b></td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','view')])</td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','create')])</td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','update')])</td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','delete')])</td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','restore')])</td>
-          <td>@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','force-delete')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','view')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','create')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','update')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','delete')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','restore')])</td>
+          <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','force-delete')])</td>
         </tr>
       @endforeach
     </tbody>

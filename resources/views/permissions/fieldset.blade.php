@@ -2,9 +2,9 @@
 
   <legend>{{ $legend }}</legend>
 
-  <div class="row">
+  <div class="card">
 
-    <table class="table">
+    <table class="table mb-0">
 
         <thead>
             <th></th>
