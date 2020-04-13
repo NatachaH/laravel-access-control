@@ -2,9 +2,6 @@
 |--------------------------------------------------------------------------
 | Pemission Checkboxes Script
 |--------------------------------------------------------------------------
-|
-| Plugin: https://quilljs.com/
-|
 */
 
 var checkboxes = document.querySelectorAll('.permission-checkbox-all input');
