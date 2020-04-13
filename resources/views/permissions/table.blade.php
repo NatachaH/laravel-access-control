@@ -13,7 +13,7 @@
     <tbody>
       @foreach ($permissions as $key => $permission)
         <tr>
-          <td><b>{{ \Lang::has($translation.'.'.$key) ? trans_choice($translation.'.'.$key) : $key  }}</b></td>
+          <td><b>{{ \Lang::has($translation.'.'.$key) ? trans_choice($translation.'.'.$key,1) : $key  }}</b></td>
           <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','view')])</td>
           <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','create')])</td>
           <td class="text-center">@include('ac::permissions.includes.icon', ['permission' => $permission->firstWhere('action','update')])</td>
