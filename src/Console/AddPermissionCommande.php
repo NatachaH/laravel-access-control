@@ -15,14 +15,14 @@ class AddPermissionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'permission:new {model? : the name of the model} {softDeletes? : is the model using SoftDeletes} {role? : set the permission for a role}';
+    protected $signature = 'permission:new {--model= : the name of the model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new permission for a model';
+    protected $description = 'Create a new permission';
 
     /**
      * Create a new command instance.
@@ -42,48 +42,52 @@ class AddPermissionCommand extends Command
     public function handle()
     {
         // Defines names and variables
-        $model = $this->argument('model');
-        if(empty($model))
-        {
-            $model = $this->ask('What is the name of the model (singular/lowercase) ?');
-        }
+        $model = $this->option('model');
 
-        // Defines actions and variables
-        $softDeletes = $this->argument('softDeletes');
-        if(empty($softDeletes))
+        if(!empty($model))
         {
+            // Defines if need the soft delete actions
             $softDeletes = $this->confirm('Is the model using SoftDeletes ?', 0);
+
+            // Define the actions
+            $actions = ['view','create','update','delete'];
+            if($softDeletes) {
+              $actions[] = 'restore';
+              $actions[] = 'force-delete';
+            }
+        } else {
+            $name = $this->as('What is the name of your permission ?');
         }
 
         // Defines role that as access to the permission
-        $role = $this->argument('role');
-        if(empty($role))
-        {
-            $roleNeeded = $this->confirm('Do you want to set this permission to a role ?', 0);
-            if($roleNeeded) {
-               $role = $this->ask('What is the name of the role ?');
-            }
-        }
-
-        // Define the actions
-        $actions = ['view','create','update','delete'];
-        if($softDeletes) {
-          $actions[] = 'restore';
-          $actions[] = 'force-delete';
+        $roleNeeded = $this->confirm('Do you want to set this permission to a role ?', 0);
+        if($roleNeeded) {
+           $role = $this->ask('What is the name of the role ?');
         }
 
         // Seed the database
         $ids = [];
 
-        foreach ($actions as $action)
+        if(!empty($model))
         {
-            $permission = Permission::create([
-                'name' => $model.'-'.$action,
-                'model' => $model,
-                'action' => $action
-            ]);
+          foreach ($actions as $action)
+          {
+              $permission = Permission::create([
+                  'name' => $model.'-'.$action,
+                  'model' => $model,
+                  'action' => $action
+              ]);
 
-            $ids[] = $permission->id;
+              $ids[] = $permission->id;
+          }
+        } else {
+          $permission = Permission::create([
+              'name' => $name,
+              'model' => NULL,
+              'action' => NULL
+          ]);
+
+          $ids[] = $permission->id;
         }
 
         // Attach the permissions to the admin Role
@@ -96,8 +100,7 @@ class AddPermissionCommand extends Command
             }
         }
 
-
         // End
-        $this->line('The permissions for the model '.$model.' has been created !');
+        $this->line('The permission has been created !');
     }
 }
