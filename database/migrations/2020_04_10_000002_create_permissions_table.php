@@ -19,7 +19,7 @@ class CreatePermissionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('model')->nullable();
-            $table->string('action')->default('view');
+            $table->string('action')->nullable();
             $table->timestamps();
         });
     }
