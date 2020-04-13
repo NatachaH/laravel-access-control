@@ -50,7 +50,10 @@ class AccessControlServiceProvider extends ServiceProvider
 
         // COMPOSERS
         View::composer(
-          ['ac::permissions.fieldset','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer',
+          ['ac::permissions.fieldset','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer'
+        );
+
+        View::composer(
           ['ac::roles.fieldset'], 'Nh\AccessControl\Composers\RolesComposer'
         );
 

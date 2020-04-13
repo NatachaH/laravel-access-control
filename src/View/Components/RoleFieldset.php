@@ -41,7 +41,7 @@ class RoleFieldset extends Component
         $this->legend       = $legend;
         $this->label        = empty($label) ? $legend : $label;
         $this->value        = $value;
-        $this->isRequired   = $isRequired;
+        $this->isRequired   = $required;
     }
 
     /**
