@@ -85,6 +85,8 @@ class Role extends Model
             $exist = $this->permissions()->where('model', $model)->where('action', $action)->exists();
             if(!$exist) return false;
         }
+
+        // If all permission exist, return true
         return true;
     }
 

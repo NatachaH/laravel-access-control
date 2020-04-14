@@ -78,12 +78,12 @@ class AddRoleableCommand extends Command
         $stub = __DIR__.'/../../stubs/';
 
         // Database
-        $sp_database   = $stub.'database/migrations/0000_00_00_000000_add_column_model_role_table.php';
+        $stub_database   = $stub.'database/migrations/0000_00_00_000000_add_column_model_role_table.php';
         $new_database  = database_path('migrations/'.date('Y_m_d').'_000000_add_column_'.$this->pname.'_role_table.php');
-        $this->copy_file($sp_database,$new_database);
+        $this->copy_file($stub_database,$new_database);
 
         // end
-        $this->line('The model '.$name.' is roleable !');
+        $this->info('The model '.$name.' is now roleable !');
     }
 
     /**

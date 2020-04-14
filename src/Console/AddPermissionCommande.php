@@ -15,7 +15,7 @@ class AddPermissionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'permission:new {--model= : the name of the model}';
+    protected $signature = 'permission:new {--model= : the name of the model (singular/lowercase)}';
 
     /**
      * The console command description.
@@ -41,66 +41,100 @@ class AddPermissionCommand extends Command
      */
     public function handle()
     {
-        // Defines names and variables
+
+        // Array of permission ids
+        $permission_ids = [];
+
+        // Check if there is a model
         $model = $this->option('model');
 
-        if(!empty($model))
+        if(empty($model))
         {
-            // Defines if need the soft delete actions
-            $softDeletes = $this->confirm('Is the model using SoftDeletes ?', 0);
+            // No model, define the name of the permission
+            $name = $this->ask('What is the name of your permission ?');
+
+            // Check permission not exist
+            $exist = Permission::where('name', $name)->exists();
+
+            // If already exist, add error msg
+            if($exist)
+            {
+                $this->error('A permission with the name '.$name.' already exist !');
+                $continu = $this->confirm('Do you want to continue ? [yes|no]', false);
+                if(!$continu){ return; }
+            }
+
+            // Create the permission
+            $permission = Permission::updateOrCreate(
+              ['name' => $name],
+              ['model' => NULL, 'action', NULL]
+            );
+
+            // Set the permission id
+            $permission_ids[] = $permission->id;
+
+            // Success
+            $this->info('The permission '.$name.' has been created !');
+
+        } else {
+
+            // Check permission for this model not exist
+            $exist = Permission::where('model', $model)->exists();
+
+            // If already exist, add error msg
+            if($exist)
+            {
+                $this->error('A permission for the model '.$model.' already exist !');
+                $continu = $this->confirm('Do you want to continue ? [yes|no]', false);
+                if(!$continu){ return; }
+            }
 
             // Define the actions
             $actions = ['view','create','update','delete'];
-            if($softDeletes) {
-              $actions[] = 'restore';
-              $actions[] = 'force-delete';
-            }
-        } else {
-            $name = $this->as('What is the name of your permission ?');
-        }
 
-        // Defines role that as access to the permission
-        $roleNeeded = $this->confirm('Do you want to set this permission to a role ?', 0);
-        if($roleNeeded) {
-           $role = $this->ask('What is the name of the role ?');
-        }
-
-        // Seed the database
-        $ids = [];
-
-        if(!empty($model))
-        {
-          foreach ($actions as $action)
-          {
-              $permission = Permission::create([
-                  'name' => $model.'-'.$action,
-                  'model' => $model,
-                  'action' => $action
-              ]);
-
-              $ids[] = $permission->id;
-          }
-        } else {
-          $permission = Permission::create([
-              'name' => $name,
-              'model' => NULL,
-              'action' => NULL
-          ]);
-
-          $ids[] = $permission->id;
-        }
-
-        // Attach the permissions to the admin Role
-        if(!empty($role))
-        {
-            $admin_role = Role::where('name',$role)->first();
-            if(!empty($admin_role))
+            // Defines if need the soft delete actions
+            $softDeletes = $this->confirm('Is the model using SoftDeletes ? [yes|no]', false);
+            if($softDeletes)
             {
-                $admin_role->permissions()->attach($ids);
+                $actions[] = 'restore';
+                $actions[] = 'force-delete';
+            }
+
+            // Create the permissions for each action
+            foreach ($actions as $action)
+            {
+                $permission = Permission::updateOrCreate(
+                  ['model' => $model, 'action' => $action],
+                  ['name' => $model.'-'.$action]
+                );
+
+                // Set the permission id
+                $permission_ids[] = $permission->id;
+            }
+
+            // Success
+            $this->info('The permission for the model '.$model.' has been created !');
+
+        }
+
+        // Add the permission(s) to a role
+        $withRole = $this->confirm('Do you want to set this permission to a role ? [yes|no]', true);
+
+        if($withRole)
+        {
+            $role_name = $this->ask('What is the name of the role ?');
+            $role = Role::where('name',$role_name)->firstOrFail();
+
+            if($role)
+            {
+                $role->permissions()->attach($permission_ids);
+            } else {
+                $this->error('Sorry but the role '.$role_name.' not exist !');
+                return;
             }
         }
 
         // End
-        $this->line('The permission has been created !');
+        $this->info('Good job, you have create a permission !');
     }
 }

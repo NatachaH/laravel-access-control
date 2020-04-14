@@ -12,10 +12,10 @@ Array.prototype.forEach.call(checkboxes, function(el, i) {
   var value = el.value;
   var actionCheckboxes = document.querySelectorAll('.permission-checkbox-'+value+' input');
 
-  // Check if all checkboxes are checked or not
+  // Make the 'all' checkbox as checked if needed
   toggleAllChecked(value);
 
-  // Make all checkboxes as checked or not
+  // On click on an 'all' checkbox, check all the checkboxes related
   el.addEventListener('change', (event) => {
       var actionCheckboxes = document.querySelectorAll('.permission-checkbox-'+(event.target.value)+' input');
       if (event.target.checked) {
@@ -25,7 +25,7 @@ Array.prototype.forEach.call(checkboxes, function(el, i) {
       }
   });
 
-  // Check if all checkboxes are checked or not
+  // On click on a checbox, check if the 'all' checkbox need to be checked
   Array.prototype.forEach.call(actionCheckboxes, function(el, i) {
     el.addEventListener('change', (event) => {
       toggleAllChecked(value);
@@ -47,7 +47,7 @@ function toggleAllCheckboxes(checkboxes, value){
 }
 
 /**
- * Toggle the 'all' checkbox if all checkboxes are checked or not
+ * Toggle the 'all' checkbox if all checkboxes are checked (or not)
  * @param  string value
  * @return void
  */

@@ -1,25 +1,97 @@
 # Installation
 
-# Test
+Install the package via composer:
 
 ```
-<h3>Roles</h3>
-  <p>Admin: {{ Auth::user()->hasRoles('admin') ? 'y' : 'n' }}</p>
-  <p>Editor: {{ Auth::user()->hasRoles('editor') ? 'y' : 'n' }}</p>
+composer require nh/access-control
+```
 
-  <h3>Permission</h3>
-  <p>Admin: {{ Auth::user()->hasPermissions('only-admin') ? 'y' : 'n' }}</p>
-  <p>Editor: {{ Auth::user()->hasPermissions('only-editor') ? 'y' : 'n' }}</p>
-  <p>Everything: {{ Auth::user()->hasPermissions('everything') ? 'y' : 'n' }}</p>
+Publish the databases for the roles and permissions:
 
-  <h3>Access Model</h3>
-  <p>User any: {{ Auth::user()->hasAccess('user') ? 'y' : 'n' }}</p>
-  <p>User all: {{ Auth::user()->hasAccess('user', null, true) ? 'y' : 'n' }}</p>
+```
+php artisan vendor:publish --tag=access-control
+```
 
-  <p>User edit: {{ Auth::user()->hasAccess('user', 'edit') ? 'y' : 'n' }}</p>
-  <p>User delete: {{ Auth::user()->hasAccess('user', 'delete') ? 'y' : 'n' }}</p>
+To make a model with role, you can create a migration via the console commande:
 
-  <p>User any edit or delete: {{ Auth::user()->hasAccess('user', ['edit','delete']) ? 'y' : 'n' }}</p>
-  <p>User edit and delete: {{ Auth::user()->hasAccess('user', ['edit','delete'], true) ? 'y' : 'n' }}</p>
+```
+php artisan role:new {model? : the name of the model}
+```
 
+Then, add the **HasAccess** trait to your model:
+
+```
+use Nh\AccessControl\Traits\HasAccess;
+
+use HasAccess;
+```
+
+# Create permission
+
+You can create permission via the console commande:
+*You can create a single permission, or all action permissions for a model.*
+
+```
+permission:new {--model= : the name of the model (singular/lowercase)}
+```
+
+
+# Check the access
+
+Check if a model has some roles :
+*You can pass a string or an array*
+
+```
+Auth::user()->hasRoles('admin')
+```
+
+Check if a model has some permissions :
+*You can pass a string or an array*
+
+```
+Auth::user()->hasPermissions('only-admin')
+```
+
+Check if a model has access to a model/action :
+*You can pass a string or an array*
+
+```
+// Has ANY permission of the Role model
+Auth::user()->hasAccess('role')
+
+// Has ALL permission of the Role model
+Auth::user()->hasAccess('role', null, true)
+
+// Has a specific permission of the Role model
+Auth::user()->hasAccess('role', 'edit')
+
+// Has ANY specific permission of the Role model
+Auth::user()->hasAccess('role', ['edit','delete'])
+
+// Has ALL specific permission of the Role model
+Auth::user()->hasAccess('role', ['edit','delete'], true)
+```
+
+# View component
+
+To display a fieldset with the select option for the role:
+*1) The roles are loaded from a composer*
+*2) The trait HasAccess will automatically attache the role to your model!*
+
+```
+<x-ac-role-fieldset legend="Legend" label="Label" value="Default value selected" required/>
+```
+
+To display a fieldset with the permissions checkboxes:
+*The permissions are loaded from a composer*
+
+```
+<x-ac-permission-fieldset legend="Legend" values="Array with the default value checked" translation="Name of the translation file for the permission name"/>
+```
+
+To display a table with the permissions with icon checkmark or cross:
+*The permissions are loaded from a composer*
+
+```
+<x-ac-permission-table values="Array with the default value checked" translation="Name of the translation file for the permission name"/>
 ```

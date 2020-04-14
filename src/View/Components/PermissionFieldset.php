@@ -14,7 +14,7 @@ class PermissionFieldset extends Component
     public $legend;
 
     /**
-     * The default checkboxes that are checked
+     * The default values that are checked
      * @var string
      */
     public $values;

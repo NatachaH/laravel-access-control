@@ -8,7 +8,7 @@ class PermissionTable extends Component
 {
 
     /**
-     * The array of the default values.
+     * The default values that are checked
      *
      * @var array
      */

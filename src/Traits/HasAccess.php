@@ -16,7 +16,7 @@ trait HasAccess
      */
     protected static function bootHasAccess()
     {
-        // Attache a role to the model
+        // Attache a role to a model when saving it
         static::saving(function ($model)
         {
             if(request()->has('role'))

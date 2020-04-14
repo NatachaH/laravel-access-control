@@ -47,7 +47,6 @@ class AccessControlServiceProvider extends ServiceProvider
         Blade::component('ac-permission-table', \Nh\AccessControl\View\Components\PermissionTable::class);
         Blade::component('ac-role-fieldset', \Nh\AccessControl\View\Components\RoleFieldset::class);
 
-
         // COMPOSERS
         View::composer(
           ['ac::permissions.fieldset','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer'
