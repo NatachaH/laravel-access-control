@@ -56,19 +56,17 @@ class AddPermissionCommand extends Command
             // Check permission not exist
             $exist = Permission::where('name', $name)->exists();
 
-            // If already exist, add error msg
+            // If already exist, add error msg and stop
             if($exist)
             {
-                $this->error('A permission with the name '.$name.' already exist !');
-                $continu = $this->confirm('Do you want to continue ? [yes|no]', false);
-                if(!$continu){ return; }
+                $this->error('Sorry, a permission with the name '.$name.' already exist !');
+                return;
             }
 
             // Create the permission
-            $permission = Permission::updateOrCreate(
-              ['name' => $name],
-              ['model' => NULL, 'action', NULL]
-            );
+            $permission = Permission::create([
+              'name' => $name
+            ]);
 
             // Set the permission id
             $permission_ids[] = $permission->id;
@@ -84,8 +82,8 @@ class AddPermissionCommand extends Command
             // If already exist, add error msg
             if($exist)
             {
-                $this->error('A permission for the model '.$model.' already exist !');
-                $continu = $this->confirm('Do you want to continue ? [yes|no]', false);
+                $this->error('Oups, a permission for the model '.$model.' already exist !');
+                $continu = $this->confirm('Do you want to continue and overide the permissions ? [yes|no]', false);
                 if(!$continu){ return; }
             }
 
@@ -123,13 +121,14 @@ class AddPermissionCommand extends Command
         if($withRole)
         {
             $role_name = $this->ask('What is the name of the role ?');
-            $role = Role::where('name',$role_name)->firstOrFail();
+            $exist = Role::where('name',$role_name)->exists();
 
-            if($role)
+            if($exist)
             {
-                $role->permissions()->attach($permission_ids);
+                $role = Role::firstWhere('name',$role_name);
+                $role->permissions()->sync($permission_ids);
             } else {
-                $this->error('Sorry but the role '.$role_name.' not exist !');
+                $this->error('Sorry, but the role '.$role_name.' not exist !');
                 return;
             }
         }
