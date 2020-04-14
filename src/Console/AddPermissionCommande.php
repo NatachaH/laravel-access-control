@@ -79,12 +79,11 @@ class AddPermissionCommand extends Command
             // Check permission for this model not exist
             $exist = Permission::where('model', $model)->exists();
 
-            // If already exist, add error msg
+            // If already exist, add error msg adn stop
             if($exist)
             {
-                $this->error('Oups, a permission for the model '.$model.' already exist !');
-                $continu = $this->confirm('Do you want to continue and overide the permissions ? [yes|no]', false);
-                if(!$continu){ return; }
+                $this->error('Sorry, a permission for the model '.$model.' already exist !');
+                return;
             }
 
             // Define the actions
@@ -101,10 +100,11 @@ class AddPermissionCommand extends Command
             // Create the permissions for each action
             foreach ($actions as $action)
             {
-                $permission = Permission::updateOrCreate(
-                  ['model' => $model, 'action' => $action],
-                  ['name' => $model.'-'.$action]
-                );
+                $permission = Permission::create([
+                  'model' => $model,
+                  'action' => $action,
+                  'name' => $model.'-'.$action
+                ]);
 
                 // Set the permission id
                 $permission_ids[] = $permission->id;
@@ -126,7 +126,7 @@ class AddPermissionCommand extends Command
             if($exist)
             {
                 $role = Role::firstWhere('name',$role_name);
-                $role->permissions()->sync($permission_ids);
+                $role->permissions()->attach($permission_ids);
             } else {
                 $this->error('Sorry, but the role '.$role_name.' not exist !');
                 return;
