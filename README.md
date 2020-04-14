@@ -32,7 +32,7 @@ You can create permission via the console commande:
 *You can create a single permission, or all action permissions for a model.*
 
 ```
-permission:new {--model= : the name of the model (singular/lowercase)}
+php artisan permission:new {--model= : the name of the model (singular/lowercase)}
 ```
 
 
