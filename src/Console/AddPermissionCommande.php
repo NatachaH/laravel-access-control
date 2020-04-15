@@ -15,7 +15,7 @@ class AddPermissionCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'permission:new {--model= : the name of the model (singular/lowercase)}';
+    protected $signature = 'permission:new {--model= : the name of the model (singular/lowercase)} {--softDelete : is the model using SoftDelete}';
 
     /**
      * The console command description.
@@ -90,8 +90,8 @@ class AddPermissionCommand extends Command
             $actions = ['view','create','update','delete'];
 
             // Defines if need the soft delete actions
-            $softDeletes = $this->confirm('Is the model using SoftDeletes ? [yes|no]', false);
-            if($softDeletes)
+            $softDelete = $this->option('softDelete');
+            if($softDelete)
             {
                 $actions[] = 'restore';
                 $actions[] = 'force-delete';
@@ -120,17 +120,10 @@ class AddPermissionCommand extends Command
 
         if($withRole)
         {
-            $role_name = $this->ask('What is the name of the role ?');
-            $exist = Role::where('name',$role_name)->exists();
-
-            if($exist)
-            {
-                $role = Role::firstWhere('name',$role_name);
-                $role->permissions()->attach($permission_ids);
-            } else {
-                $this->error('Sorry, but the role '.$role_name.' not exist !');
-                return;
-            }
+            $roles = Role::select('name')->get()->pluck('name')->toArray();
+            $role_name = $this->choice('What is the name of the role ?',$roles);
+            $role = Role::firstWhere('name',$role_name);
+            $role->permissions()->attach($permission_ids);
         }
 
         // End
