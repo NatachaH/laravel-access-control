@@ -46,7 +46,7 @@ class PermissionFieldset extends Component
      */
     public function isOptionChecked($option)
     {
-        $currentValues = old($this->name,$this->values);
+        $currentValues = old('permissions',$this->values);
         return in_array($option, $currentValues);
     }
 
