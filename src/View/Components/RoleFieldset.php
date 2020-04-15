@@ -27,21 +27,29 @@ class RoleFieldset extends Component
 
     /**
      * Is the select required
-     * @var string
+     * @var boolean
      */
-    public $isRequired;
+    public $required;
+
+    /**
+     * Is the select required
+     * Can be a boolean or an array
+     * @var mixed
+     */
+    public $disabled;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($legend, $label = '', $value = '', $required)
+    public function __construct($legend, $label = '', $value = '', $required = false, $disabled = false)
     {
         $this->legend       = $legend;
         $this->label        = empty($label) ? $legend : $label;
         $this->value        = $value;
-        $this->isRequired   = $required;
+        $this->required     = $required;
+        $this->disabled     = $disabled;
     }
 
     /**
