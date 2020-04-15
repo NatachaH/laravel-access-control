@@ -34,6 +34,15 @@ class Role extends Model
     }
 
     /**
+     * Get the restrictions (Permission that the role don't have access).
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function restrictions()
+    {
+        return Permission::whereNotIn('id',$this->permissions->modelKeys())->get();
+    }
+
+    /**
      * Check if a role has some permission
      * @param  mixed   $permissions  Can be a string or an array
      * @param  string  $column       Column where to search
