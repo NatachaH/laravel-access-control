@@ -12,7 +12,7 @@ class PermissionTable extends Component
      *
      * @var array
      */
-    public $values;
+    public $optionsChecked;
 
     /**
      * The path for the $key translation
@@ -21,14 +21,34 @@ class PermissionTable extends Component
     public $translation;
 
     /**
+     * Get the icon of the option
+     * @param  string  $option
+     * @return string
+     */
+    public function optionIcon($option)
+    {
+        return in_array($option, $this->optionsChecked) ? 'checkmark' : 'cross';
+    }
+
+    /**
+     * Get the color of the option
+     * @param  string  $option
+     * @return string
+     */
+    public function optionColor($option)
+    {
+        return in_array($option, $this->optionsChecked) ? 'success' : 'danger';
+    }
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($values, $translation = 'permission')
+    public function __construct($checked, $translation = 'permission')
     {
-        $this->values = $values;
-        $this->translation = $translation;
+        $this->optionsChecked = $checked;
+        $this->translation    = $translation;
     }
 
     /**
