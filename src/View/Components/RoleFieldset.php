@@ -20,10 +20,10 @@ class RoleFieldset extends Component
     public $label;
 
     /**
-     * The default value of the select
+     * The default selected option
      * @var string
      */
-    public $value;
+    public $selected;
 
     /**
      * Is the select required
@@ -43,13 +43,13 @@ class RoleFieldset extends Component
      *
      * @return void
      */
-    public function __construct($legend, $label = '', $value = '', $required = false, $disabled = false)
+    public function __construct($legend, $label = '', $selected = '',  $disabled = false, $required = false)
     {
         $this->legend       = $legend;
         $this->label        = empty($label) ? $legend : $label;
-        $this->value        = $value;
-        $this->required     = $required;
+        $this->selected     = $selected;
         $this->disabled     = $disabled;
+        $this->required     = $required;
     }
 
     /**

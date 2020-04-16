@@ -14,10 +14,21 @@ class PermissionFieldset extends Component
     public $legend;
 
     /**
-     * The default values that are checked
+     * Array of the checked options
      * @var string
      */
-    public $values;
+    private $optionsChecked;
+
+    /**
+     * Check if the option is checked
+     * @param  string  $option
+     * @return boolean
+     */
+    public function isOptionChecked($option)
+    {
+        $currentValues = old('permissions',$this->optionsChecked);
+        return in_array($option, $currentValues);
+    }
 
     /**
      * The path for the $key translation
@@ -37,18 +48,7 @@ class PermissionFieldset extends Component
      *
      * @var array
      */
-    public $optionsDisabled;
-
-    /**
-     * Check if the option is checked
-     * @param  string  $option
-     * @return boolean
-     */
-    public function isOptionChecked($option)
-    {
-        $currentValues = old('permissions',$this->values);
-        return in_array($option, $currentValues);
-    }
+    private $optionsDisabled;
 
     /**
      * Check if the option is disabled
@@ -65,10 +65,10 @@ class PermissionFieldset extends Component
      *
      * @return void
      */
-    public function __construct($legend, $values = [], $translation = 'permission', $disabled = false)
+    public function __construct($legend, $checked = [], $translation = 'permission', $disabled = false)
     {
         $this->legend           = $legend;
-        $this->values           = $values;
+        $this->optionsChecked   = (array)$checked;
         $this->translation      = $translation;
         $this->isDisabled       = is_bool($disabled) ? $disabled : false;
         $this->optionsDisabled  = is_array($disabled) ? $disabled : [];

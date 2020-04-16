@@ -2,6 +2,6 @@
 
   <legend>{{ $legend }}</legend>
 
-  <x-bs-select :label="$label" name="role" :options="$roles" :selected="$value" :disabled="$disabled" :required="$required" />
+  <x-bs-select :label="$label" name="role" :options="$roles" :selected="$selected" :disabled="$disabled" :required="$required" />
 
 </fieldset>
