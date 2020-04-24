@@ -12,7 +12,7 @@ return [
     */
 
     'translations' => [
-        'permission' => ''
+        'permission' => 'permission'
     ],
 
     /*
