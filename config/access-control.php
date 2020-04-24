@@ -13,11 +13,11 @@ return [
 
     'icons' => [
         'check' => [
-          'color' => 'success',
+          'color' => 'text-success',
           'class' => 'icon-checkmark'
         ],
         'cross' => [
-          'color' => 'danger',
+          'color' => 'text-danger',
           'class' => 'icon-cross'
         ]
     ]

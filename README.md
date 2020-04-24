@@ -100,9 +100,10 @@ In your form, add the PermissionFieldset component:
 
 In your view, add the PermissionTable component:
 *The permissions are loaded from a composer*
+*You can custom the icon class and color in the config file access-control.php*
 
 ```
-<x-ac-permission-table :checked="$role->permissions" translation="my.translation.file"/>
+<x-ac-permission-table :checked="$role->permissions->modelKeys()" translation="my.translation.file"/>
 ```
 
 In your form, add the RoleFieldset component:
