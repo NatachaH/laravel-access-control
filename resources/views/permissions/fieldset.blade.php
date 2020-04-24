@@ -6,12 +6,12 @@
 
         <thead>
             <th></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.view')" name="permissionCheckboxAll[]" value="view"/></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.create')" name="permissionCheckboxAll[]" value="create"/></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.update')" name="permissionCheckboxAll[]" value="update"/></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.delete')" name="permissionCheckboxAll[]" value="delete"/></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.restore')" name="permissionCheckboxAll[]" value="restore"/></th>
-            <th><x-bs-check class="permission-checkbox-all" :label="__('ac::action.force-delete')" name="permissionCheckboxAll[]" value="force-delete"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.view')" name="permissionCheckboxAll[]" value="view"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.create')" name="permissionCheckboxAll[]" value="create"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.update')" name="permissionCheckboxAll[]" value="update"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.delete')" name="permissionCheckboxAll[]" value="delete"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.restore')" name="permissionCheckboxAll[]" value="restore"/></th>
+            <th><x-bs-check class="checkbox-all" :label="__('ac::action.force-delete')" name="permissionCheckboxAll[]" value="force-delete"/></th>
         </thead>
 
         <tbody>

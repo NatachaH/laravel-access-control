@@ -72,26 +72,43 @@ Auth::user()->hasAccess('role', ['edit','delete'])
 Auth::user()->hasAccess('role', ['edit','delete'], true)
 ```
 
-# View component
+# Components view
 
-To display a fieldset with the select option for the role:
-*1) The roles are loaded from a composer*
-*2) The trait HasAccess will automatically attache the role to your model!*
+The package come with some view components:
+
+- PermissionFieldset : to add/edit the permissions in a form.
+- PermissionTable : to display the permissions of a role.
+- RoleFieldset : to add/edit a role in a form.
+
+## Javascript
+
+You need to include this file in your JS:
 
 ```
-<x-ac-role-fieldset legend="Legend" label="Label" value="Default value selected" required/>
+require('../../vendor/nh/bs-component/resources/js/checkbox-all');
 ```
 
-To display a fieldset with the permissions checkboxes:
+## Views
+
+In your form, add the PermissionFieldset component:
+*The permissions are loaded from a composer*
+*The option disabled can be a boolean or an array of id*
+
+```
+<x-ac-permission-fieldset legend="Legend" :checked="$role->permissions" translation="my.translation.file" disabled/>
+```
+
+In your view, add the PermissionTable component:
 *The permissions are loaded from a composer*
 
 ```
-<x-ac-permission-fieldset legend="Legend" values="Array with the default value checked" translation="Name of the translation file for the permission name"/>
+<x-ac-permission-table :checked="$role->permissions" translation="my.translation.file"/>
 ```
 
-To display a table with the permissions with icon checkmark or cross:
-*The permissions are loaded from a composer*
+In your form, add the RoleFieldset component:
+*The roles are loaded from a composer*
+*The trait HasAccess will automatically attache the role to your model*
 
 ```
-<x-ac-permission-table values="Array with the default value checked" translation="Name of the translation file for the permission name"/>
+<x-ac-role-fieldset legend="My role" label="Role" selected="1" disabled required/>
 ```

@@ -27,7 +27,7 @@ class PermissionTable extends Component
      */
     public function optionIcon($option)
     {
-        return in_array($option, $this->optionsChecked) ? 'checkmark' : 'cross';
+        return in_array($option, $this->optionsChecked) ? config('access-control.icons.check.class') : config('access-control.icons.cross.class');
     }
 
     /**
@@ -37,7 +37,7 @@ class PermissionTable extends Component
      */
     public function optionColor($option)
     {
-        return in_array($option, $this->optionsChecked) ? 'success' : 'danger';
+        return in_array($option, $this->optionsChecked) ? config('access-control.icons.check.color') : config('access-control.icons.cross.color');
     }
 
     /**
