@@ -93,17 +93,20 @@ require('../../vendor/nh/bs-component/resources/js/checkbox-all');
 In your form, add the PermissionFieldset component:
 *The permissions are loaded from a composer*
 *The option disabled can be a boolean or an array of id*
+*You can define the translation file to use in the config file access-control.php*
 
 ```
-<x-ac-permission-fieldset legend="Legend" :checked="$role->permissions" translation="my.translation.file" disabled/>
+<x-ac-permission-fieldset legend="Legend" :checked="$role->permissions" disabled/>
 ```
 
 In your view, add the PermissionTable component:
 *The permissions are loaded from a composer*
 *You can custom the icon class and color in the config file access-control.php*
+*You can define the translation file to use in the config file access-control.php*
+
 
 ```
-<x-ac-permission-table :checked="$role->permissions->modelKeys()" translation="my.translation.file"/>
+<x-ac-permission-table :checked="$role->permissions->modelKeys()" />
 ```
 
 In your form, add the RoleFieldset component:

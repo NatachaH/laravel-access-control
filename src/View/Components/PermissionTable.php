@@ -45,10 +45,10 @@ class PermissionTable extends Component
      *
      * @return void
      */
-    public function __construct($checked, $translation = 'permission')
+    public function __construct($checked)
     {
         $this->optionsChecked = $checked;
-        $this->translation    = $translation;
+        $this->translation    = config('access-control.translations.permission');
     }
 
     /**

@@ -65,13 +65,13 @@ class PermissionFieldset extends Component
      *
      * @return void
      */
-    public function __construct($legend, $checked = [], $translation = 'permission', $disabled = false)
+    public function __construct($legend, $checked = [], $disabled = false)
     {
         $this->legend           = $legend;
         $this->optionsChecked   = (array)$checked;
-        $this->translation      = $translation;
         $this->isDisabled       = is_bool($disabled) ? $disabled : false;
         $this->optionsDisabled  = is_array($disabled) ? $disabled : [];
+        $this->translation      = config('access-control.translations.permission');
     }
 
     /**
