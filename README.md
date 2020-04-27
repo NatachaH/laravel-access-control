@@ -71,3 +71,47 @@ Auth::user()->hasAccess('role', ['edit','delete'])
 // Has ALL specific permission of the Role model
 Auth::user()->hasAccess('role', ['edit','delete'], true)
 ```
+
+# Models
+
+The package come with two models:
+
+- Role
+- Permission
+
+Both model use the trait **Searchable** from nh/searchable.
+
+## Role
+
+The role have only a **name** attribute.
+
+You can retrieve the restricted permissions:
+
+```
+$role->restriction();
+```
+
+You can check if a role have a permission:
+*$permissions can be a string or an array*
+
+```
+$role->hasPermissions($permissions, $column)
+```
+
+You can check if a role have a permission by model/action:
+*$actions can be a string or an array*
+*$strict must be a boolean, and check if AS ANY or AS ALL permission*
+
+```
+$role->hasPermissionsModel($model,$actions,$strict)
+```
+
+# Permission
+
+You can retrieve a list of all permission, ordered by model:
+*The key is the model field*
+*If there is no model, the key will be name, and the action will be 'view'*
+
+```
+Permission::getByModel();
+```
