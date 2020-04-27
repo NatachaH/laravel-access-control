@@ -5,6 +5,7 @@ namespace Nh\AccessControl;
 use Illuminate\Database\Eloquent\Model;
 
 use Nh\AccessControl\Role;
+use Nh\Searchable\Traits\Searchable;
 
 class Permission extends Model
 {
@@ -23,6 +24,15 @@ class Permission extends Model
      * @var int
      */
     protected $perPage = 10;
+
+    /**
+     * The searchable columns.
+     *
+     * @var array
+     */
+    protected $searchable = [
+      'name', 'model', 'action'
+    ];
 
     /**
      * Get the roles record associated with the permission.
