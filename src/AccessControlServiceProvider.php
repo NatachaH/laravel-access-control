@@ -36,7 +36,6 @@ class AccessControlServiceProvider extends ServiceProvider
 
         // VENDORS
         $this->publishes([
-            __DIR__.'/../config/access-control.php' => config_path('access-control.php'),
             __DIR__.'/../database/migrations/2020_04_10_000001_create_roles_table.php' => base_path('database/migrations/2020_04_10_000001_create_roles_table.php'),
             __DIR__.'/../database/migrations/2020_04_10_000002_create_permissions_table.php' => base_path('database/migrations/2020_04_10_000002_create_permissions_table.php'),
             __DIR__.'/../database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php')
