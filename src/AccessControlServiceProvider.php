@@ -2,8 +2,6 @@
 namespace Nh\AccessControl;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
 
 
 class AccessControlServiceProvider extends ServiceProvider
@@ -35,22 +33,6 @@ class AccessControlServiceProvider extends ServiceProvider
                 \Nh\AccessControl\Commands\AddRoleableCommand::class,
             ]);
         }
-
-        // VIEWS
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ac');
-
-        // BLADES
-        Blade::component('ac-permission-fieldset', \Nh\AccessControl\View\Components\PermissionFieldset::class);
-        Blade::component('ac-permission-table', \Nh\AccessControl\View\Components\PermissionTable::class);
-
-        // COMPOSERS
-        View::composer(
-          ['ac::permissions.fieldset','ac::permissions.table'], 'Nh\AccessControl\Composers\PermissionsComposer'
-        );
-
-        View::composer(
-          ['ac::roles.fieldset'], 'Nh\AccessControl\Composers\RolesComposer'
-        );
 
         // VENDORS
         $this->publishes([
