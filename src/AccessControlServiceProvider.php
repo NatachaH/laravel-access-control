@@ -39,13 +39,9 @@ class AccessControlServiceProvider extends ServiceProvider
         // VIEWS
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'ac');
 
-        // TRANSLATIONS
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ac');
-
         // BLADES
         Blade::component('ac-permission-fieldset', \Nh\AccessControl\View\Components\PermissionFieldset::class);
         Blade::component('ac-permission-table', \Nh\AccessControl\View\Components\PermissionTable::class);
-        Blade::component('ac-role-fieldset', \Nh\AccessControl\View\Components\RoleFieldset::class);
 
         // COMPOSERS
         View::composer(
