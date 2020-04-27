@@ -3,9 +3,7 @@
     "description": "Access controle via roles and permissions",
     "license": "MIT",
     "type": "library",
-    "require": {
-      "nh/bs-component": "dev-master"
-    },
+    "require": {},
     "author": {
         "name": "Natacha Herth",
         "email": "info@natachaherth.ch"
