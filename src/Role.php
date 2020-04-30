@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use Nh\AccessControl\Permission;
 use Nh\Searchable\Traits\Searchable;
+use Nh\Trackable\Traits\Trackable;
 
 class Role extends Model
 {
     use Searchable;
+    use Trackable;
 
     /**
      * The attributes that are mass assignable.
