@@ -29,8 +29,8 @@ class AccessControlServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole())
         {
             $this->commands([
-                \Nh\AccessControl\Commands\AddPermissionCommand::class,
-                \Nh\AccessControl\Commands\AddRoleableCommand::class,
+                \Nh\AccessControl\Console\Commands\AddPermissionCommand::class,
+                \Nh\AccessControl\Console\Commands\AddRoleableCommand::class,
             ]);
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nh\AccessControl\Commands;
+namespace Nh\AccessControl\Console\Commands;
 
 use Illuminate\Console\Command;
 
