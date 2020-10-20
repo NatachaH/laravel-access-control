@@ -38,7 +38,9 @@ class AccessControlServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/2020_04_10_000001_create_roles_table.php' => base_path('database/migrations/2020_04_10_000001_create_roles_table.php'),
             __DIR__.'/../database/migrations/2020_04_10_000002_create_permissions_table.php' => base_path('database/migrations/2020_04_10_000002_create_permissions_table.php'),
-            __DIR__.'/../database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php')
+            __DIR__.'/../database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php'),
+            __DIR__.'/../app/Models/Permission.php' => app_path('Models/Permission.php'),
+            __DIR__.'/../app/Models/Role.php' => app_path('Models/Role.php')
         ], 'access-control');
 
 

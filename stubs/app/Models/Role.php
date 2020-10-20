@@ -4,15 +4,10 @@ namespace Nh\AccessControl;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Nh\AccessControl\Permission;
-use Nh\Searchable\Traits\Searchable;
-use Nh\Trackable\Traits\Trackable;
+use App\Models\Permission;
 
 class Role extends Model
 {
-    use Searchable;
-    use Trackable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -20,21 +15,6 @@ class Role extends Model
      */
     protected $fillable = [
         'name'
-    ];
-
-    /**
-     * Default number of items per page.
-     * @var int
-     */
-    protected $perPage = 10;
-
-    /**
-     * The searchable columns.
-     *
-     * @var array
-     */
-    protected $searchable = [
-      'name'
     ];
 
     /**

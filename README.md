@@ -6,7 +6,7 @@ Install the package via composer:
 composer require nh/access-control
 ```
 
-Publish the databases for the roles and permissions:
+Publish the databases and the models for the roles and permissions:
 
 ```
 php artisan vendor:publish --tag=access-control
@@ -78,8 +78,6 @@ The package come with two models:
 
 - Role
 - Permission
-
-Both model use the trait **Searchable** from nh/searchable.
 
 ## Role
 
