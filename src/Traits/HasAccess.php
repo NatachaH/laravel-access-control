@@ -4,7 +4,7 @@ namespace Nh\AccessControl\Traits;
 use App;
 use Illuminate\Database\Eloquent\Builder;
 
-use Nh\AccessControl\Role;
+use App\Models\Role;
 
 trait HasAccess
 {
