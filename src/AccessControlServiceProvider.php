@@ -36,11 +36,11 @@ class AccessControlServiceProvider extends ServiceProvider
 
         // VENDORS
         $this->publishes([
-            __DIR__.'/../stubs/database/migrations/2020_04_10_000001_create_roles_table.php' => base_path('database/migrations/2020_04_10_000001_create_roles_table.php'),
-            __DIR__.'/../stubs/database/migrations/2020_04_10_000002_create_permissions_table.php' => base_path('database/migrations/2020_04_10_000002_create_permissions_table.php'),
-            __DIR__.'/../stubs/database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php'),
-            __DIR__.'/../stubs/app/Models/Permission.php' => app_path('Models/Permission.php'),
-            __DIR__.'/../stubs/app/Models/Role.php' => app_path('Models/Role.php')
+            __DIR__.'/../database/migrations/2020_04_10_000001_create_roles_table.php' => base_path('database/migrations/2020_04_10_000001_create_roles_table.php'),
+            __DIR__.'/../database/migrations/2020_04_10_000002_create_permissions_table.php' => base_path('database/migrations/2020_04_10_000002_create_permissions_table.php'),
+            __DIR__.'/../database/migrations/2020_04_10_000003_create_permission_role_table.php' => base_path('database/migrations/2020_04_10_000003_create_permission_role_table.php'),
+            __DIR__.'/Models/Permission.php' => app_path('Models/Permission.php'),
+            __DIR__.'/Models/Role.php' => app_path('Models/Role.php')
         ], 'access-control');
 
 

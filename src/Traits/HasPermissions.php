@@ -1,21 +1,10 @@
 <?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
+namespace Nh\AccessControl\Traits;
 
 use App\Models\Permission;
 
-class Role extends Model
+trait HasPermissions
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name'
-    ];
 
     /**
      * Get the permissions record associated with the role.

@@ -33,20 +33,20 @@ class Permission extends Model
      */
     public function scopeGetByModel()
     {
-      // Get permission with model
-      $permissions = $this->whereNotNull('model')->select('id','model','action')->get()->groupBy('model');
+        // Get permission with model
+        $permissions = $this->whereNotNull('model')->select('id','model','action')->get()->groupBy('model');
 
-      // Get permission without model
-      $permissionWithoutModel = $this->whereNull('model')->select('id','name','action')->get()->keyBy('name');
+        // Get permission without model
+        $permissionWithoutModel = $this->whereNull('model')->select('id','name','action')->get()->keyBy('name');
 
-      // Foreach permission without model, set default action as view and push in $permissions
-      foreach ($permissionWithoutModel as $key => $value) {
-        $value->action = 'view';
-        $permissions[$key] = collect()->push($value);
-      }
+        // Foreach permission without model, set default action as view and push in $permissions
+        foreach ($permissionWithoutModel as $key => $value) {
+          $value->action = 'view';
+          $permissions[$key] = collect()->push($value);
+        }
 
-      // Set the permissions
-      return $permissions;
+        // Set the permissions
+        return $permissions;
     }
 
 }
