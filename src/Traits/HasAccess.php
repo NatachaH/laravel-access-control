@@ -22,8 +22,10 @@ trait HasAccess
         {
             if(request()->has('role'))
             {
-                if($model->role->id != request()->role)
+                if(is_null($model->role))
                 {
+                    RoleEvent::dispatch('created', $model);
+                } else if($model->role->id != request()->role) {
                     RoleEvent::dispatch('updated', $model);
                 }
                 $model->role()->associate(request()->role);
