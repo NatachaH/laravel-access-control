@@ -117,8 +117,8 @@ Permission::getByModel();
 
 # Events
 
-You can use the **AccessEvent** for dispatch events that happen to the role access.
+You can use the **RoleEvent** for dispatch events that happen to the role access.
 
 ```
-AccessEvent::dispatch('my-event', $model);
+RoleEvent::dispatch('my-event', $model);
 ```

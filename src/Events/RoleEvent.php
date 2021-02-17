@@ -5,7 +5,7 @@ namespace Nh\AccessControl\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AccessEvent
+class RoleEvent
 {
     use Dispatchable, SerializesModels;
 
@@ -21,7 +21,7 @@ class AccessEvent
     public function __construct($name,$model)
     {
           $this->name    = $name;
-          $this->relation = 'access';
+          $this->relation = 'role';
           $this->model   = $model;
     }
 }

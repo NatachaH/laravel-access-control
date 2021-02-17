@@ -4,7 +4,7 @@ namespace Nh\AccessControl\Traits;
 use App;
 use Illuminate\Database\Eloquent\Builder;
 
-use Nh\AccessControl\Events\AccessEvent;
+use Nh\AccessControl\Events\RoleEvent;
 use App\Models\Role;
 
 trait HasAccess
@@ -24,7 +24,7 @@ trait HasAccess
             {
                 if($model->role->id != request()->role)
                 {
-                    AccessEvent::dispatch('updated', $model);
+                    RoleEvent::dispatch('updated', $model);
                 }
                 $model->role()->associate(request()->role);
             }
