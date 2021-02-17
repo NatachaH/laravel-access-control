@@ -113,3 +113,12 @@ You can retrieve a list of all permission, ordered by model:
 ```
 Permission::getByModel();
 ```
+
+
+# Events
+
+You can use the **AccessEvent** for dispatch events that happen to the role access.
+
+```
+AccessEvent::dispatch('my-event', $model);
+```
