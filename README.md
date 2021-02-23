@@ -149,3 +149,11 @@ You can use the **set-roles** Gate to check if current Auth can set the roles.
 ```
 Gate::authorize('set-roles', $roles);
 ```
+
+You can use the **set-permissions** Gate to check if current Auth can set the permission for a role.
+*$permissions must be an array of ids*
+*In the config file you can specify the roles that are guarded and required an Auth of the same role*
+
+```
+Gate::authorize('set-permissions', $permissions);
+```

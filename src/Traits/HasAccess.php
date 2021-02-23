@@ -19,18 +19,6 @@ trait HasAccess
         // Attache a role to a model when saving it
         static::saving(function ($model)
         {
-
-            // Request for many roles
-            if(config('access-control.manyRoles') && request()->has('roles'))
-            {
-                $event = $model->hasAnyRole() ? 'created' : 'updated';
-                $sync = $model->roles()->sync(request()->roles);
-                if(syncIsDisrty($sync))
-                {
-                    RoleEvent::dispatch($event, $model);
-                }
-            }
-
             // Request for one role
             if(!config('access-control.manyRoles') && request()->has('role'))
             {
@@ -42,7 +30,21 @@ trait HasAccess
                 }
                 $model->role()->associate(request()->role);
             }
+        });
 
+        // Attache a role to a model when saved
+        static::saved(function ($model)
+        {
+            // Request for many roles
+            if(config('access-control.manyRoles') && request()->has('roles'))
+            {
+                $event = $model->hasAnyRole() ? 'created' : 'updated';
+                $sync = $model->roles()->sync(request()->roles);
+                if(!empty(array_filter($sync)))
+                {
+                    RoleEvent::dispatch($event, $model);
+                }
+            }
         });
     }
 
@@ -160,13 +162,11 @@ trait HasAccess
          // Request for many
          if(config('access-control.manyRoles'))
          {
+            // Check foreach roles if permission restrictions
              $restrictions = [];
-             // Check foreach roles if permission restrictions
              foreach ($this->roles as $role) {
-                 array_push($restrictions,$role->restrictions()->modelKeys());
+                 $restrictions = array_merge($restrictions,$role->restrictions()->modelKeys());
              }
-
-
              return $restrictions;
          }
 

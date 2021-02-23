@@ -66,6 +66,11 @@ class AccessControlServiceProvider extends ServiceProvider
             return true;
         });
 
+        // Only set the permission that the user have access
+        Gate::define('set-permissions', function ($user, $permissions) {
+            $restrictions = $user->permission_restrictions;
+            return empty(array_intersect($permissions,$restrictions ?? []));
+        });
 
     }
 }
