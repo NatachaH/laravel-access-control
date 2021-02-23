@@ -86,9 +86,7 @@ trait HasAccess
         // Request for many
         if(config('access-control.manyRoles'))
         {
-            return $this->whereHas('roles', function (Builder $query) use ($roles,$column) {
-                $query->whereIn($column,(array)$roles);
-            })->exists();
+            return $this->roles()->whereIn($column,(array)$roles)->exists();
         }
 
         // Default request
@@ -109,11 +107,9 @@ trait HasAccess
         if(config('access-control.manyRoles'))
         {
             // Check foreach roles if permission exists
-            $access = [];
-            foreach ($this->roles as $role) {
-                $access[] = $role->hasPermissions((array)$permissions) ? $role->id : null;
-            }
-            return !empty(array_filter($access));
+            return $this->roles()->each(function($item, $key) use ($permissions){
+              return $item->hasPermissions((array)$permissions);
+            });
         }
 
         // Default request
