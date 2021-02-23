@@ -48,19 +48,19 @@ class AccessControlServiceProvider extends ServiceProvider
         // GATE
         Gate::define('set-roles', function ($user, $roles)
         {
+            // Get the guarded roles
             $guarded = config('access-control.guarded');
-            $superadmin = config('access-control.superadmin');
 
             // If theire is no guarded roles
             if(empty($guarded)) return true;
 
             // If user have superpower => true
-            if($user->hasRoles($superadmin)) return true;
+            if($user->has_superpowers) return true;
 
             // Check for each roles
             foreach ((array)$roles as $key => $roleId) {
                 $role = \App\Models\Role::findOrFail($roleId);
-                $inArray = in_array($role->guard,config('access-control.guarded'));
+                $inArray = in_array($role->guard,$guarded);
                 if($inArray && !$user->hasRoles($role->guard)) return false;
             }
             return true;

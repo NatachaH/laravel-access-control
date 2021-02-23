@@ -102,7 +102,6 @@ trait HasAccess
      */
     public function hasPermissions($permissions)
     {
-
         // If no roles return false
         if(!$this->hasAnyRole()) return false;
 
@@ -130,7 +129,6 @@ trait HasAccess
      */
     public function hasAccess($model, $actions = null, $strict = false)
     {
-
         // If no roles return false
         if(!$this->hasAnyRole()) return false;
 
@@ -147,7 +145,6 @@ trait HasAccess
 
         // Default request
         return $this->role->hasPermissionsModel($model,$actions, $strict);
-
     }
 
     /**
@@ -170,5 +167,15 @@ trait HasAccess
          // Default request
          return $this->role->restrictions()->modelKeys();
      }
+
+     /**
+      * Check if the model has superpowers
+      * @return boolean
+      */
+     public function getHasSuperpowersAttribute()
+     {
+         return $this->hasRoles(config('access-control.superpowers'));
+     }
+
 
 }

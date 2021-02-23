@@ -83,6 +83,14 @@ Auth::user()->hasAccess('role', ['update','delete'])
 Auth::user()->hasAccess('role', ['update','delete'], true)
 ```
 
+Check if a model has superpower :
+*You can change the superpowers role in the config file*
+
+```
+// Return a boolean
+Auth:user()->has_superpowers;
+```
+
 # Models
 
 The package come with two models:
