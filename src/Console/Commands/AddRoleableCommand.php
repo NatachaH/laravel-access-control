@@ -63,7 +63,7 @@ class AddRoleableCommand extends Command
     public function handle()
     {
         // Defines names
-        $name = $this->argument('model');
+        $name = $this->option('model');
         if(empty($name))
         {
             $name = $this->ask('What is the name of the model (singular/lowercase) ?');
@@ -75,7 +75,7 @@ class AddRoleableCommand extends Command
         $this->ucpname  = ucfirst($this->pname);
 
         // Defines many
-        $many = $this->argument('many');
+        $many = $this->option('many');
         if(empty($many))
         {
             $many = $this->confirm('Does the model have multiple roles ? [yes|no]', false);
