@@ -130,25 +130,46 @@ trait HasAccess
     public function hasAccess($model, $actions = null, $strict = false)
     {
 
-      // If no roles return false
-      if(!$this->hasAnyRole()) return false;
+        // If no roles return false
+        if(!$this->hasAnyRole()) return false;
 
-      // Request for many
-      if(config('access-control.manyRoles'))
-      {
-          // Check foreach roles if permission exists
-          foreach ($this->roles as $role) {
-              $exist = $role->hasPermissionsModel($model,$actions, $strict);
-              if(!$exist) return false;
-          }
+        // Request for many
+        if(config('access-control.manyRoles'))
+        {
+            // Check foreach roles if permission exists
+            foreach ($this->roles as $role) {
+                $exist = $role->hasPermissionsModel($model,$actions, $strict);
+                if(!$exist) return false;
+            }
 
-          // If all permission exist, return true
-          return true;
-      }
+            // If all permission exist, return true
+            return true;
+        }
 
-      // Default request
-      return $this->role->hasPermissionsModel($model,$actions, $strict);
+        // Default request
+        return $this->role->hasPermissionsModel($model,$actions, $strict);
 
+    }
+
+    /**
+     * Get the permission resctrictions for a model
+     * @return array
+     */
+    public function getPermissionResctrictionsAttribute()
+    {
+        // Request for many
+        if(config('access-control.manyRoles'))
+        {
+            $resctrictions = [];
+            // Check foreach roles if permission restrictions
+            foreach ($this->roles as $role) {
+                array_push($resctrictions,$role->restrictions()->modelKeys());
+            }
+            return $resctrictions;
+        }
+
+        // Default request
+        return $this->role->restrictions()->modelKeys();
     }
 
 }

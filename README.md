@@ -97,7 +97,13 @@ The role have a **guard** and **name** attribute.
 You can retrieve the restricted permissions:
 
 ```
-$role->restriction();
+$role->restrictions();
+```
+
+You can also retrieve the restricted permissions from a model with multiple roles:
+
+```
+Auth::user()->permission_restrictions;
 ```
 
 You can check if a role have a permission:
