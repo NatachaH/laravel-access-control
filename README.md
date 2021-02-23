@@ -74,13 +74,13 @@ Auth::user()->hasAccess('role')
 Auth::user()->hasAccess('role', null, true)
 
 // Has a specific permission of the Role model
-Auth::user()->hasAccess('role', 'edit')
+Auth::user()->hasAccess('role', 'update')
 
 // Has ANY specific permission of the Role model
-Auth::user()->hasAccess('role', ['edit','delete'])
+Auth::user()->hasAccess('role', ['update','delete'])
 
 // Has ALL specific permission of the Role model
-Auth::user()->hasAccess('role', ['edit','delete'], true)
+Auth::user()->hasAccess('role', ['update','delete'], true)
 ```
 
 # Models
