@@ -1,7 +1,7 @@
 <?php
 namespace Nh\AccessControl\Traits;
 
-use App\Models\Permission;
+use Nh\AccessControl\Models\Permission;
 
 trait HasPermissions
 {

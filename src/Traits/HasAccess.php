@@ -48,7 +48,7 @@ trait HasAccess
      * @param  string  $column Column where to search
      * @return boolean
      */
-    public function hasRoles($roles, $column = 'name')
+    public function hasRoles($roles, $column = 'guard')
     {
         return $this->role()->whereIn($column, (array)$roles)->exists();
     }
@@ -56,10 +56,9 @@ trait HasAccess
     /**
      * Check if the model has any permissions
      * @param  mixed   $permissions Can be a string or an array
-     * @param  string  $column      Column where to search
      * @return boolean
      */
-    public function hasPermissions($permissions, $column = 'name')
+    public function hasPermissions($permissions)
     {
         return $this->role()->exists() && $this->role->hasPermissions((array)$permissions);
     }

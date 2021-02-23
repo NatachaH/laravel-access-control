@@ -6,7 +6,7 @@ Install the package via composer:
 composer require nh/access-control
 ```
 
-Publish the databases and the models for the roles and permissions:
+Publish the databases and the models for the roles:
 
 ```
 php artisan vendor:publish --tag=access-control

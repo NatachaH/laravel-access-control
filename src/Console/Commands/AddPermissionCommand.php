@@ -4,7 +4,7 @@ namespace Nh\AccessControl\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Models\Permission;
+use Nh\AccessControl\Models\Permission;
 use App\Models\Role;
 
 class AddPermissionCommand extends Command
