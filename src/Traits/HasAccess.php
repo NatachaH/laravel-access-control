@@ -152,12 +152,12 @@ trait HasAccess
          // Request for many
          if(config('access-control.manyRoles'))
          {
-            // Check foreach roles if permission restrictions
-             $restrictions = [];
+             // Regroup all permissions and then gett the diff
+             $permissions = [];
              foreach ($this->roles as $role) {
-                 $restrictions = array_merge($restrictions,$role->restrictions()->modelKeys());
+                $permissions = array_merge($permissions,$role->permissions->modelKeys());
              }
-             return $restrictions;
+             return  \Nh\AccessControl\Models\Permission::whereNotIn('id',$permissions)->get()->modelKeys();
          }
 
          // Default request
