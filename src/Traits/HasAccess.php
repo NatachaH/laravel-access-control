@@ -102,6 +102,7 @@ trait HasAccess
      */
     public function hasPermissions($permissions)
     {
+
         // If no roles return false
         if(!$this->hasAnyRole()) return false;
 
@@ -109,13 +110,11 @@ trait HasAccess
         if(config('access-control.manyRoles'))
         {
             // Check foreach roles if permission exists
+            $access = [];
             foreach ($this->roles as $role) {
-                $exist = $role->hasPermissions((array)$permissions);
-                if(!$exist) return false;
+                $access[] = $role->hasPermissions((array)$permissions) ? $role->id : null;
             }
-
-            // If all permission exist, return true
-            return true;
+            return !empty(array_filter($access));
         }
 
         // Default request
@@ -139,13 +138,11 @@ trait HasAccess
         if(config('access-control.manyRoles'))
         {
             // Check foreach roles if permission exists
+            $access = [];
             foreach ($this->roles as $role) {
-                $exist = $role->hasPermissionsModel($model,$actions, $strict);
-                if(!$exist) return false;
+                $access[] = $role->hasPermissionsModel($model,$actions, $strict) ? $role->id : null;
             }
-
-            // If all permission exist, return true
-            return true;
+            return !empty(array_filter($access));
         }
 
         // Default request
