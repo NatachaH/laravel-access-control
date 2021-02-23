@@ -13,12 +13,13 @@ php artisan vendor:publish --tag=access-control
 ```
 
 To make a model with role, you can create a migration via the console commande:
+*The --many option will create a roleables table with many to many morph relationship*
 
 ```
-php artisan role:new {model? : the name of the model}
+php artisan role:new {--model= : the name of the model (singular/lowercase)} {--many : is the model using many to many}
 ```
 
-Then, add the **HasAccess** trait to your model:
+Then, if your model is has only one role add the **HasAccess** trait to your model:
 
 ```
 use Nh\AccessControl\Traits\HasAccess;
@@ -38,24 +39,34 @@ php artisan permission:new {--model= : the name of the model (singular/lowercase
 
 # Check the access
 
+Check if a model has any role :
+```
+Auth::user()->hasAnyRole()
+```
+
 Check if a model has some roles :
-*You can pass a string or an array*
+*You must pass a string or an array*
+*By default it will check on the guard column, but you can specify the column*
 
 ```
 Auth::user()->hasRoles('admin')
+Auth::user()->hasRoles('Administrator','name')
 ```
 
 Check if a model has some permissions :
-*You can pass a string or an array*
+*You must pass a string or an array*
 
 ```
 Auth::user()->hasPermissions('only-admin')
 ```
 
 Check if a model has access to a model/action :
-*You can pass a string or an array*
+*You must pass a string for the model and a string or an array for the actions*
 
 ```
+// Request
+hasAccess(string $model, mixed $actions = null, boolean $strict = false)
+
 // Has ANY permission of the Role model
 Auth::user()->hasAccess('role')
 
@@ -81,7 +92,7 @@ The package come with two models:
 
 ## Role
 
-The role have only a **name** attribute.
+The role have a **guard** and **name** attribute.
 
 You can retrieve the restricted permissions:
 

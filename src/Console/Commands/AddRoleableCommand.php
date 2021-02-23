@@ -12,7 +12,7 @@ class AddRoleableCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'role:new {model? : the name of the model}';
+    protected $signature = 'role:new {--model= : the name of the model (singular/lowercase)} {--many : is the model using many to many}';
 
     /**
      * The console command description.
@@ -62,7 +62,7 @@ class AddRoleableCommand extends Command
      */
     public function handle()
     {
-        // Defines names and variables
+        // Defines names
         $name = $this->argument('model');
         if(empty($name))
         {
@@ -74,13 +74,34 @@ class AddRoleableCommand extends Command
         $this->ucname   = ucfirst($name);
         $this->ucpname  = ucfirst($this->pname);
 
+        // Defines many
+        $many = $this->argument('many');
+        if(empty($many))
+        {
+            $many = $this->confirm('Does the model have multiple roles ? [yes|no]', false);
+        }
+
         // Copy the files
         $stub = __DIR__.'/../../../stubs/';
 
-        // Database
-        $stub_database   = $stub.'database/migrations/0000_00_00_000000_add_column_model_role_table.php';
-        $new_database  = database_path('migrations/'.date('Y_m_d').'_000000_add_column_'.$this->pname.'_role_table.php');
-        $this->copy_file($stub_database,$new_database);
+        if($many)
+        {
+           // Many to Many (exemple: user has many roles)
+           $stub_database   = $stub.'database/migrations/0000_00_00_000000_create_roleables_table.php';
+           $new_database  = database_path('migrations/2020_04_10_000004_create_roleables_table.php');
+           if(!file_exists($new_database))
+           {
+              $this->copy_file($stub_database,$new_database);
+           } else {
+              $this->error('Sorry, a roleable database already exist !');
+           }
+
+        } else {
+            // One to many (exemple: user has one role)
+            $stub_database   = $stub.'database/migrations/0000_00_00_000000_add_column_model_role_table.php';
+            $new_database  = database_path('migrations/'.date('Y_m_d').'_000000_add_column_'.$this->pname.'_role_table.php');
+            $this->copy_file($stub_database,$new_database);
+        }
 
         // end
         $this->info('The model '.$name.' is now roleable !');

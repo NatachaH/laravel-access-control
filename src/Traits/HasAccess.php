@@ -9,7 +9,6 @@ use App\Models\Role;
 
 trait HasAccess
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -20,7 +19,20 @@ trait HasAccess
         // Attache a role to a model when saving it
         static::saving(function ($model)
         {
-            if(request()->has('role'))
+
+            // Request for many roles
+            if(config('access-control.manyRoles') && request()->has('roles'))
+            {
+                $event = $model->hasAnyRole() ? 'created' : 'updated';
+                $sync = $model->roles()->sync(request()->roles);
+                if(syncIsDisrty($sync))
+                {
+                    RoleEvent::dispatch($event, $model);
+                }
+            }
+
+            // Request for one role
+            if(!config('access-control.manyRoles') && request()->has('role'))
             {
                 if(is_null($model->role))
                 {
@@ -30,6 +42,7 @@ trait HasAccess
                 }
                 $model->role()->associate(request()->role);
             }
+
         });
     }
 
@@ -39,7 +52,25 @@ trait HasAccess
      */
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return config('access-control.manyRoles') ? null : $this->belongsTo(Role::class) ;
+    }
+
+    /**
+     * Get the roles of a model.
+     * @return \App\Models\Role
+     */
+    public function roles()
+    {
+        return config('access-control.manyRoles') ? $this->morphToMany(Role::class, 'roleable') : null;
+    }
+
+    /**
+     * Check if the model has at least one role
+     * @return boolean
+     */
+    public function hasAnyRole()
+    {
+        return config('access-control.manyRoles') ? $this->roles()->exists() : $this->role()->exists();
     }
 
     /**
@@ -50,6 +81,15 @@ trait HasAccess
      */
     public function hasRoles($roles, $column = 'guard')
     {
+        // Request for many
+        if(config('access-control.manyRoles'))
+        {
+            return $this->whereHas('roles', function (Builder $query) use ($roles,$column) {
+                $query->whereIn($column,(array)$roles);
+            })->exists();
+        }
+
+        // Default request
         return $this->role()->whereIn($column, (array)$roles)->exists();
     }
 
@@ -60,7 +100,24 @@ trait HasAccess
      */
     public function hasPermissions($permissions)
     {
-        return $this->role()->exists() && $this->role->hasPermissions((array)$permissions);
+        // If no roles return false
+        if(!$this->hasAnyRole()) return false;
+
+        // Request for many
+        if(config('access-control.manyRoles'))
+        {
+            // Check foreach roles if permission exists
+            foreach ($this->roles as $role) {
+                $exist = $role->hasPermissions((array)$permissions);
+                if(!$exist) return false;
+            }
+
+            // If all permission exist, return true
+            return true;
+        }
+
+        // Default request
+        return $this->role->hasPermissions((array)$permissions);
     }
 
     /**
@@ -72,7 +129,26 @@ trait HasAccess
      */
     public function hasAccess($model, $actions = null, $strict = false)
     {
-        return $this->role()->exists() && $this->role->hasPermissionsModel($model,$actions, $strict);
+
+      // If no roles return false
+      if(!$this->hasAnyRole()) return false;
+
+      // Request for many
+      if(config('access-control.manyRoles'))
+      {
+          // Check foreach roles if permission exists
+          foreach ($this->roles as $role) {
+              $exist = $role->hasPermissionsModel($model,$actions, $strict);
+              if(!$exist) return false;
+          }
+
+          // If all permission exist, return true
+          return true;
+      }
+
+      // Default request
+      return $this->role->hasPermissionsModel($model,$actions, $strict);
+
     }
 
 }
