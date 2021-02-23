@@ -16,10 +16,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Superadmin
+    |--------------------------------------------------------------------------
+    |
+    | Here you may sdefine the superadmin (superpower) role that can do anything !
+    */
+
+    'superadmin' => 'superadmin',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Guarded
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the roles that can be assigned only by the same role
+    */
+
+    'guarder' => ['superadmin'],
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Protected
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the roles that are protected
+    | Here you may specify the roles that are protected (to use in policies)
     */
 
     'protected' => ['superadmin','admin']

@@ -2,6 +2,7 @@
 namespace Nh\AccessControl;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 
 class AccessControlServiceProvider extends ServiceProvider
@@ -43,6 +44,27 @@ class AccessControlServiceProvider extends ServiceProvider
             __DIR__.'/../config/access-control.php' => config_path('access-control.php')
 
         ], 'access-control');
+
+        // GATE
+        Gate::define('set-roles', function ($user, $roles)
+        {
+            $guarded = config('access-control.guarded');
+            $superadmin = config('access-control.superadmin');
+
+            // If theire is no guarded roles
+            if(empty($guarded)) return true;
+
+            // If user have superpower => true
+            if($user->hasRoles($superadmin)) return true;
+
+            // Check for each roles
+            foreach ((array)$roles as $key => $roleId) {
+                $role = \App\Models\Role::findOrFail($roleId);
+                $inArray = in_array($role->guard,config('access-control.guarded'));
+                if($inArray && !$user->hasRoles($role->guard)) return false;
+            }
+            return true;
+        });
 
 
     }

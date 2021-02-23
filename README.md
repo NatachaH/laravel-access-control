@@ -139,3 +139,13 @@ You can use the **RoleEvent** for dispatch events that happen to the role access
 ```
 RoleEvent::dispatch('my-event', $model);
 ```
+
+# Gates
+
+You can use the **set-roles** Gate to check if current Auth can set the roles.
+*$roles must be an array of ids*
+*In the config file you can specify the roles that are guarded and required an Auth of the same role*
+
+```
+Gate::authorize('set-roles', $roles);
+```
