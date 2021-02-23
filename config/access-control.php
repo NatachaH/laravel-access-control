@@ -14,5 +14,15 @@ return [
 
     'manyRoles' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Protected
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the roles that are protected
+    */
+
+    'protected' => ['superadmin','admin']
+
 
 ];
