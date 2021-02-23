@@ -152,24 +152,26 @@ trait HasAccess
     }
 
     /**
-     * Get the permission resctrictions for a model
+     * Get the permission restrictions for a model
      * @return array
      */
-    public function getPermissionResctrictionsAttribute()
-    {
-        // Request for many
-        if(config('access-control.manyRoles'))
-        {
-            $resctrictions = [];
-            // Check foreach roles if permission restrictions
-            foreach ($this->roles as $role) {
-                array_push($resctrictions,$role->restrictions()->modelKeys());
-            }
-            return $resctrictions;
-        }
+     public function getPermissionRestrictionsAttribute()
+     {
+         // Request for many
+         if(config('access-control.manyRoles'))
+         {
+             $restrictions = [];
+             // Check foreach roles if permission restrictions
+             foreach ($this->roles as $role) {
+                 array_push($restrictions,$role->restrictions()->modelKeys());
+             }
 
-        // Default request
-        return $this->role->restrictions()->modelKeys();
-    }
+
+             return $restrictions;
+         }
+
+         // Default request
+         return $this->role->restrictions()->modelKeys();
+     }
 
 }
