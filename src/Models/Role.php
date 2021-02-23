@@ -20,4 +20,13 @@ class Role extends Model
         'guard','name'
     ];
 
+    /**
+     * Check if the role is protected
+     * @return boolean
+     */
+    public function getIsProtectedAttribute()
+    {
+       return in_array($this->guard, config('access-control.protected'));
+    }
+
 }
