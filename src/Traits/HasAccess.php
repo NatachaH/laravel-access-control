@@ -38,7 +38,7 @@ trait HasAccess
             // Request for many roles
             if(config('access-control.manyRoles') && request()->has('roles'))
             {
-                $event = $model->hasAnyRole() ? 'created' : 'updated';
+                $event = $model->hasAnyRole() ? 'updated' : 'created';
                 $sync = $model->roles()->sync(request()->roles);
                 if(!empty(array_filter($sync)))
                 {
