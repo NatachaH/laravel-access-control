@@ -173,5 +173,20 @@ trait HasAccess
          return $this->hasRoles(config('access-control.superpowers'));
      }
 
+     /**
+      * Scope a query with role(s).
+      *
+      * @param  \Illuminate\Database\Eloquent\Builder  $query
+      * @param  mixed $value
+      * @param  string $column
+      * @return \Illuminate\Database\Eloquent\Builder
+      */
+     public function scopeWithRole(Builder $query, $value = null, string $column = 'guard')
+     {
+         return $query->whereHas('roles', function($query) use ($value,$column){
+           $query->whereIn($column,(array)$value);
+         });
+     }
+
 
 }

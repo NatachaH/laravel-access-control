@@ -91,6 +91,14 @@ Check if a model has superpower :
 Auth:user()->has_superpowers;
 ```
 
+Scope the model with role(s) :
+
+```
+User::withRole('admin')->get();
+User::withRole(['superadmin','admin'])->get();
+User::withRole(2,'role_id')->get();
+```
+
 # Models
 
 The package come with two models:
