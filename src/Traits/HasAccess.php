@@ -63,7 +63,7 @@ trait HasAccess
      */
     public function roles()
     {
-        return config('access-control.manyRoles') ? $this->morphToMany(Role::class, 'roleable') : null;
+        return config('access-control.manyRoles') ? $this->morphToMany(Role::class, 'roleable')->withTimestamps() : null;
     }
 
     /**
