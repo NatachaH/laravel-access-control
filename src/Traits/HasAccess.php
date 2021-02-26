@@ -107,9 +107,11 @@ trait HasAccess
         if(config('access-control.manyRoles'))
         {
             // Check foreach roles if permission exists
-            return $this->roles()->each(function($item, $key) use ($permissions){
-              return $item->hasPermissions((array)$permissions);
-            });
+            $access = [];
+            foreach ($this->roles as $role) {
+                $access[] = $role->hasPermissions((array)$permissions) ? $role->id : null;
+            }
+            return !empty(array_filter($access));
         }
 
         // Default request
