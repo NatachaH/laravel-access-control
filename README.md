@@ -137,17 +137,6 @@ You can check if a role have a permission by model/action:
 $role->hasPermissionsModel($model,$actions,$strict)
 ```
 
-# Permission
-
-You can retrieve a list of all permission, ordered by model:
-*The key is the model field*
-*If there is no model, the key will be name, and the action will be 'view'*
-
-```
-Permission::getByModel();
-```
-
-
 # Events
 
 You can use the **RoleEvent** for dispatch events that happen to the role access.

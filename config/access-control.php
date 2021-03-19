@@ -45,5 +45,17 @@ return [
 
     'protected' => ['superadmin','admin']
 
+    /*
+    |--------------------------------------------------------------------------
+    | Permissions
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the actions for permissions
+    */
+
+    'permissions' => [
+        'actions' => ['view','create','update','delete','restore','force-delete']
+    ]
+
 
 ];
