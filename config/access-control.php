@@ -43,7 +43,7 @@ return [
     | Here you may specify the roles that are protected (to use in policies)
     */
 
-    'protected' => ['superadmin','admin']
+    'protected' => ['superadmin','admin'],
 
     /*
     |--------------------------------------------------------------------------
