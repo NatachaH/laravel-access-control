@@ -29,7 +29,7 @@ trait HasAccess
                     $event = 'updated';
                 }
                 $model->role()->associate(request()->role);
-                RoleEvent::dispatch($event, $model, $model->role());
+                RoleEvent::dispatch($event, $model, $model->role);
             }
         });
 
