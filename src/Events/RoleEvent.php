@@ -4,6 +4,7 @@ namespace Nh\AccessControl\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Role;
 
 class RoleEvent
 {
@@ -22,7 +23,6 @@ class RoleEvent
     {
           $this->name     = $name;
           $this->model    = $model;
-          $this->relation = $relation;
-
+          $this->relation = is_null($relation) ? new Role : $relation;
     }
 }
