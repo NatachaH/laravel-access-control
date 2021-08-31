@@ -142,7 +142,7 @@ $role->hasPermissionsModel($model,$actions,$strict)
 You can use the **RoleEvent** for dispatch events that happen to the role access.
 
 ```
-RoleEvent::dispatch('my-event', $model);
+RoleEvent::dispatch('my-event', $model, $role);
 ```
 
 # Gates

@@ -24,11 +24,12 @@ trait HasAccess
             {
                 if(is_null($model->role))
                 {
-                    RoleEvent::dispatch('created', $model);
+                    $event = 'created';
                 } else if($model->role->id != request()->role) {
-                    RoleEvent::dispatch('updated', $model);
+                    $event = 'updated';
                 }
                 $model->role()->associate(request()->role);
+                RoleEvent::dispatch($event, $model, $model->role());
             }
         });
 
