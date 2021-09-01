@@ -16,22 +16,6 @@ trait HasAccess
      */
     protected static function bootHasAccess()
     {
-        // Attache a role to a model when saving it
-        static::saving(function ($model)
-        {
-            // Request for one role
-            if(!config('access-control.manyRoles') && request()->has('role'))
-            {
-                if(is_null($model->role))
-                {
-                    $event = 'created';
-                } else if($model->role->id != request()->role) {
-                    $event = 'updated';
-                }
-                $model->role()->associate(request()->role);
-                RoleEvent::dispatch($event, $model, $model->role);
-            }
-        });
 
         // Attache a role to a model when saved
         static::saved(function ($model)
@@ -43,8 +27,12 @@ trait HasAccess
                 $sync = $model->roles()->sync(request()->roles);
                 if(!empty(array_filter($sync)))
                 {
-                    RoleEvent::dispatch($event, $model);
+                    RoleEvent::dispatch($event, $model, null, $sync);
                 }
+            } elseif(request()->has('role')) {
+                $event = !is_null($model->role) && $model->role->id != request()->role ? 'updated' : 'created';
+                $model->role()->associate(request()->role)->saveQuietly();
+                RoleEvent::dispatch($event, $model, $model->role, 1);
             }
         });
     }
