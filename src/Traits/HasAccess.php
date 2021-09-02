@@ -27,7 +27,8 @@ trait HasAccess
                 $sync = $model->roles()->sync(request()->roles);
                 if(!empty(array_filter($sync)))
                 {
-                    RoleEvent::dispatch($event, $model, null, $sync);
+                    $nbr = count($sync['attached'])+count($sync['detached'])+count($sync['updated']);
+                    RoleEvent::dispatch($event, $model, null, $nbr);
                 }
             } elseif(request()->has('role')) {
                 $event = !is_null($model->role) && $model->role->id != request()->role ? 'updated' : 'created';
