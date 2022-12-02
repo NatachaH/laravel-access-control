@@ -45,6 +45,17 @@ return [
 
     'protected' => ['superadmin','admin'],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Name Protected
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the roles that have the name protected (in case of hasRoles() you should avoid the update of the role guard name)
+    */
+
+    'name-protected' => ['superadmin','admin'],
+
     /*
     |--------------------------------------------------------------------------
     | Permissions
