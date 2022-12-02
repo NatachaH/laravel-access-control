@@ -48,13 +48,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Name Protected
+    | Guard Protected
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the roles that have the name protected (in case of hasRoles() you should avoid the update of the role guard name)
+    | Here you may specify the roles that have the guard protected (in case of hasRoles() you should avoid the update of the role guard)
     */
 
-    'name-protected' => ['superadmin','admin'],
+    'guard-protected' => ['superadmin','admin'],
 
     /*
     |--------------------------------------------------------------------------
