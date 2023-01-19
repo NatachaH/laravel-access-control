@@ -34,7 +34,6 @@ return [
 
     'guarded' => ['superadmin'],
 
-
     /*
     |--------------------------------------------------------------------------
     | Protected
@@ -43,8 +42,7 @@ return [
     | Here you may specify the roles that are protected (to use in policies)
     */
 
-    'protected' => ['superadmin','admin'],
-
+    'protected' => ['superadmin', 'admin'],
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +52,7 @@ return [
     | Here you may specify the roles that have the guard protected (in case of hasRoles() you should avoid the update of the role guard)
     */
 
-    'guard-protected' => ['superadmin','admin'],
+    'guard-protected' => ['superadmin', 'admin'],
 
     /*
     |--------------------------------------------------------------------------
@@ -65,8 +63,7 @@ return [
     */
 
     'permissions' => [
-        'actions' => ['view','create','update','delete','restore','force-delete']
-    ]
-
+        'actions' => ['view', 'create', 'update', 'delete', 'restore', 'force-delete'],
+    ],
 
 ];

@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePermissionRoleTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        /**
-         * Run the migrations.
-         *
-         * @return void
-         */
         Schema::create('permission_role', function (Blueprint $table) {
             $table->bigInteger('permission_id')->unsigned();
             $table->bigInteger('role_id')->unsigned();

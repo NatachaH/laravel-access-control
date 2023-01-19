@@ -13,8 +13,7 @@ class CreateRoleablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roleables', function (Blueprint $table)
-        {
+        Schema::create('roleables', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('role_id')->unsigned();
             $table->morphs('roleable');
